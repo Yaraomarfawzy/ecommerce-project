@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <h1 class="text-3xl font-bold text-center mb-6">Shopping Cart</h1>
+
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
+    <!-- Cart Items Container -->
+    <div id="cart-items" class="mb-4">
+      <!-- المنتجات هتظهر هنا -->
+    </div>
+
+    <!-- Total Items -->
+    <div class="text-right font-semibold mb-4">
+      Total Items: <span id="total-items">0</span>
+    </div>
+
+    <!-- Checkout Button -->
+    <button class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded font-semibold">
+      Proceed to Checkout
+    </button>
+  </div>
+
+  <script src="/js/cart.js"></script>
+</body>
+</html>

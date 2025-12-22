@@ -5,8 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Favicon: place your favicon at /image/favicon.ico or update the href -->
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <!-- Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
 </head>
 <body>
+ <header >
+    <nav class="flex justify-between items-center p-4 bg-gray-100 shadow-md">
+        <div>
+            <a href="http://"><img src="/image/logo-watch-shop.png" alt="" srcset=""></a>
+        </div>
+        <ul class="flex space-x-4">
+            <li><a href="#" class="text-blue-500 hover:underline">Home</a></li>
+            <li><a href="#" class="text-blue-500 hover:underline">About</a></li>
+            <li><a href="#" class="text-blue-500 hover:underline">Services</a></li>
+            <li><a href="#" class="text-blue-500 hover:underline">Contact</a></li>
+        </ul>
+        <div class="flex items-center space-x-4">
+       <a href="../page/cart.html">
+        <i class="fa-solid fa-cart-shopping fa-xl"></i>
+        <span id="counter" class="text-white bg-black p-1">0</span>
+       </a>
+            <a href="../page/login.html" class="text-gray-600 hover:text-gray-800 bg-black text-white px-4 py-2 rounded-md" >
+            login
+            </a>
+        </div>
+    </nav>
+ </header>
+
+
+<section class="flex justify-center items-center  p-4 ">
+   <div class="flex flex-col justify-center items-start w-1/2" style="width: 490px; line-height:  61px; ">
+  <div style="font-size: 43px; line-height:  61px;">
+    <span class="text-gray-400 my-5 block">
+    Skip the Impossible
+  </span>
+
+  <h1 class="capitalize">
+    <span class="block text-4xl font-normal mb-3">
+      extraordinary
+    </span>
+    <span class="block text-5xl font-extrabold">
+      performance
+    </span>
+  </h1>
+  </div>
+
+  <div class="mt-9  " >
+    <button class="bg-black text-white px-6 py-3 rounded-md">
+      Shop Now
+    </button>
+    <button class="ml-4 bg-gray-800 text-white px-6 py-3 rounded-md">
+      Watch Now
+    </button>
+  </div>
+</div>
+
+
+    <div class="w-1/2 flex justify-center items-center">
+        <img src="/image/section01-img02.png" alt="" class=" mx-4" style="width: 760; height: 600px;">
+        
+    </div>
     
+</section>
+<section class="bg-gray-100 py-16" >
+  <!-- Section Header -->
+  <div class="max-w-4xl mx-auto text-center px-4" id="">
+    <h2 class="text-3xl font-extrabold mb-4 capitalize text-gray-900">
+      Pear-Watch Products
+    </h2>
+    <p class="text-gray-600 mb-8 leading-relaxed">
+      Discover the finest collection of watches that combine style and functionality.
+      Whether you're looking for a classic timepiece or a modern design, we have something for everyone.
+    </p>
+    <a href="#"
+      class="inline-block bg-black text-white px-8 py-3 rounded-md font-medium hover:bg-gray-800 transition">
+      Explore Our Collection
+    </a>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 mt-14">
+
+    <!-- Card -->
+    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-5 text-center product" data-aos="fade-up" >
+      <img src="/image/black-watch-600x600.png" alt="Black Watch"
+        class="w-full h-56 object-contain mb-4">
+      <h3 class="text-xl font-semibold capitalize mb-1 product-name">Black Watch</h3>
+      <span class="block text-lg font-bold text-gray-900 mb-4 product-price" >$300</span>
+      <button
+        class="w-full bg-black text-white py-2 rounded-md capitalize hover:bg-gray-800 transition add"  >
+        add to cart
+      </button>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-5 text-center product" data-aos="fade-up" >
+      <img src="/image/gold-watch-600x600.png" alt="Gold Watch"
+        class="w-full h-56 object-contain mb-4">
+      <h3 class="text-xl font-semibold capitalize mb-1 product-name">Gold Watch</h3>
+      <span class="block text-lg font-bold text-gray-900 mb-4 product-price">$400</span>
+      <button
+        class="w-full bg-black text-white py-2 rounded-md capitalize hover:bg-gray-800 transition add"  >
+        add to cart
+      </button>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-5 text-center product" data-aos="fade-up">
+      <img src="/image/watch-2-600x600.png" alt="Silver Watch"
+        class="w-full h-56 object-contain mb-4">
+      <h3 class="text-xl font-semibold capitalize mb-1 product-name">Silver Watch</h3>
+      <span class="block text-lg font-bold text-gray-900 mb-4 product-price">$350</span>
+      <button
+        class="w-full bg-black text-white py-2 rounded-md capitalize hover:bg-gray-800 transition add"  >
+        add to cart
+      </button>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-5 text-center product" data-aos="fade-up">
+      <img src="/image/watch-1-600x600.png" alt="Classic Watch"
+        class="w-full h-56 object-contain mb-4">
+      <h3 class="text-xl font-semibold capitalize mb-1 product-name">Classic Watch</h3>
+      <span class="block text-lg font-bold text-gray-900 mb-4 product-price">$250</span>
+      <button
+        class="w-full bg-black text-white py-2 rounded-md capitalize hover:bg-gray-800 transition add"  >
+        add to cart
+      </button>
+    </div>
+
+  </div>
+</section>
+  
+
 </body>
+<!-- AOS JS and init -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+</script>
+<script src="/js/home.js"></script>
+<!-- <script src="/js/cart.js"></script> -->
 </html>
