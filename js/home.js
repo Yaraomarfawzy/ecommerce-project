@@ -1,8 +1,6 @@
 let buttons = document.querySelectorAll('.add');
 let counter = document.getElementById('counter');
 let products = document.querySelectorAll('.product');
-// let arrayproducts = Array.from(products);
-let savedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
 // console.log(buttons);
 // console.log(counter);
 // console.log(products);
@@ -16,9 +14,22 @@ buttons.forEach((button)=>{
     const productCard = e.target.closest('.product');
     const productName = productCard.querySelector('.product-name').innerText;
     const productPrice = productCard.querySelector('.product-price').innerText;
-    console.log(`Added to cart: ${productName} - ${productPrice}`);
-    localStorage.setItem(productName, productPrice);
+    // console.log(`Added to cart: ${productName} - ${productPrice}`);
+    let cart = JSON.parse(localStorage.getItem('cart')) || { products: [] };
+     if (!cart.products) {
+            cart.products = [];
+        }
+     cart.products.push({ name: productName, price: productPrice });
+
+         localStorage.setItem('cart', JSON.stringify(cart));
+         console.log(cart);
     
 
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    counter.textContent = '0';
+    localStorage.removeItem('cart');
+});
+    
