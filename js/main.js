@@ -36,7 +36,7 @@ registerbutton.addEventListener("click", function () {
     successmessage.style.color = "green";
     successmessage.style.fontWeight = "bold";
     setInterval(() => {
-    location.href = "../page/login.html";
+    location.href = "/login.html";
     }, 1500);
 
 });
