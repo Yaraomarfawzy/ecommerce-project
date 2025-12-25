@@ -18,7 +18,7 @@ if (loginbutton) {
             successmessage.textContent = "Invalid email or password ";
         }
         setInterval(() => {
-            location.href = "../page/home.html";
+            location.href = "../page/index.html";
         }, 1500);
     });
 }
