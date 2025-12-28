@@ -1,37 +1,77 @@
 let buttons = document.querySelectorAll('.add');
 let counter = document.getElementById('counter');
-let products = document.querySelectorAll('.product');
-// console.log(buttons);
-// console.log(counter);
-// console.log(products);
 
-buttons.forEach((button)=>{
-    button.addEventListener('click',(e)=>{
-        alert('Item added to cart');
-        counter.textContent= parseInt(counter.textContent) + 1;
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
 
+  toast.classList.remove('opacity-0', 'translate-y-4');
+  toast.classList.add('opacity-100', 'translate-y-0');
+
+  setTimeout(() => {
+    toast.classList.add('opacity-0', 'translate-y-4');
+    toast.classList.remove('opacity-100', 'translate-y-0');
+  }, 2000);
+}
+
+buttons.forEach((button) => {
+  button.addEventListener('click', (e) => {
 
     const productCard = e.target.closest('.product');
     const productName = productCard.querySelector('.product-name').innerText;
     const productPrice = productCard.querySelector('.product-price').innerText;
     const productDescription = productCard.querySelector('.product-desc').innerText;
     const productImage = productCard.querySelector('img').src;
-    // console.log(`Added to cart: ${productName} - ${productPrice}`);
+
     let cart = JSON.parse(localStorage.getItem('cart')) || { products: [] };
-     if (!cart.products) {
-            cart.products = [];
-        }
-     cart.products.push({ name: productName, price: productPrice, description: productDescription, quantity: 1, Image: productImage });
 
-         localStorage.setItem('cart', JSON.stringify(cart));
-         console.log(cart);
+    let existingProduct = cart.products.find(p => p.name === productName);
+
+
+    button.style.display = 'none';
     
+    let div = document.createElement('div');
+    div.classList.add('qty-controls');
+    div.innerHTML = `
+        <div class="flex items-center justify-center mt-3">
+        <p class="text-white bg-green-500 p-3">item is added in cart</p>
+        </div>
+    `;
+    // div.innerHTML = `
+    //   <div class="flex items-center mt-3">
+    //     <button class="decrease px-2 py-1 border rounded">−</button>
+    //     <span class="quantity mx-3">
+    //       ${existingProduct ? existingProduct.quantity : 1}
+    //     </span>
+    //     <button class="increase px-2 py-1 border rounded">+</button>
+    //   </div>
+    // `;
+    productCard.appendChild(div);
+    showToast('Item is added to cart ');
+    // let decreaseBtn = div.querySelector('.decrease');
+    // let increaseBtn = div.querySelector('.increase');
+    // let quantitySpan = div.querySelector('.quantity');
+   
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+      
+    } else {
+      cart.products.push({
+        name: productName,
+        price: productPrice,
+        description: productDescription,
+        quantity: 1,
+        image: productImage
+      });
+      counter.textContent = parseInt(counter.textContent) + 1;
+    }
 
-    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+  });
+
+  
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    counter.textContent = '0';
-    localStorage.removeItem('cart');
-});
+document.addEventListener('DOMContentLoaded', () => { counter.textContent = '0'; localStorage.removeItem('cart'); });;
+
     
