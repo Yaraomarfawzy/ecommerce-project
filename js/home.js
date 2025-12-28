@@ -2,15 +2,15 @@ let buttons = document.querySelectorAll('.add');
 let counter = document.getElementById('counter');
 
 function showToast(message) {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
+  const toastMessage = document.getElementById('toast-message') || document.getElementById('toast');
+  toastMessage.textContent = message;
 
-  toast.classList.remove('opacity-0', 'translate-y-4');
-  toast.classList.add('opacity-100', 'translate-y-0');
+  toastMessage.classList.remove('opacity-0', 'translate-y-4');
+  toastMessage.classList.add('opacity-100', 'translate-y-0');
 
   setTimeout(() => {
-    toast.classList.add('opacity-0', 'translate-y-4');
-    toast.classList.remove('opacity-100', 'translate-y-0');
+    toastMessage.classList.add('opacity-0', 'translate-y-4');
+    toastMessage.classList.remove('opacity-100', 'translate-y-0');
   }, 2000);
 }
 
@@ -22,6 +22,9 @@ buttons.forEach((button) => {
     const productPrice = productCard.querySelector('.product-price').innerText;
     const productDescription = productCard.querySelector('.product-desc').innerText;
     const productImage = productCard.querySelector('img').src;
+    
+
+    
 
     let cart = JSON.parse(localStorage.getItem('cart')) || { products: [] };
 
@@ -72,6 +75,9 @@ buttons.forEach((button) => {
   
 });
 
-document.addEventListener('DOMContentLoaded', () => { counter.textContent = '0'; localStorage.removeItem('cart'); });;
+document.addEventListener('DOMContentLoaded', () => {
+  let cart = JSON.parse(localStorage.getItem('cart')) || { products: [] };
+  counter.textContent = cart.products.length;
+});
 
     

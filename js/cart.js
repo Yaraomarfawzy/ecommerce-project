@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <h3 class="text-lg font-semibold mb-2">${item.name}</h3>
       <span class="text-gray-700 font-bold">${item.price} EGP</span>
       <p class="product-description mt-2 text-gray-600">${item.description}</p>
-      <img src="${item.Image}" alt="${item.name}" class="w-24 h-24 object-cover mt-2">
+      <img src="${item.image || item.Image || ''}" alt="${item.name}" class="w-24 h-24 object-cover mt-2">
 
       <div class="flex items-center mt-3">
         <button class="decrease px-2 py-1 border rounded">−</button>
