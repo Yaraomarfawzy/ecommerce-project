@@ -74,10 +74,6 @@ buttons.forEach((button) => {
 
   
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  let cart = JSON.parse(localStorage.getItem('cart')) || { products: [] };
-  counter.textContent = cart.products.length;
-});
+document.addEventListener('DOMContentLoaded', () => { counter.textContent = '0'; localStorage.removeItem('cart'); });
 
     
