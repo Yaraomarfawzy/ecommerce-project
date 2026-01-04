@@ -35,26 +35,45 @@ buttons.forEach((button) => {
     
     let div = document.createElement('div');
     div.classList.add('qty-controls');
+   
     div.innerHTML = `
-        <div class="flex items-center justify-center mt-3">
-        <p class="text-white bg-green-500 p-3">item is added in cart</p>
-        </div>
+      <div class="flex items-center mt-3">
+        <button class="decrease px-2 py-1 border rounded">−</button>
+        <span class="quantity mx-3">
+          ${existingProduct ? existingProduct.quantity : 1}
+        </span>
+        <button class="increase px-2 py-1 border rounded">+</button>
+      </div>
     `;
-    // div.innerHTML = `
-    //   <div class="flex items-center mt-3">
-    //     <button class="decrease px-2 py-1 border rounded">−</button>
-    //     <span class="quantity mx-3">
-    //       ${existingProduct ? existingProduct.quantity : 1}
-    //     </span>
-    //     <button class="increase px-2 py-1 border rounded">+</button>
-    //   </div>
-    // `;
     productCard.appendChild(div);
     showToast('Item is added to cart ');
-    // let decreaseBtn = div.querySelector('.decrease');
-    // let increaseBtn = div.querySelector('.increase');
-    // let quantitySpan = div.querySelector('.quantity');
-   
+    let decreaseBtn = div.querySelector('.decrease');
+    let increaseBtn = div.querySelector('.increase');
+    let quantitySpan = div.querySelector('.quantity');
+    decreaseBtn.addEventListener('click', () => {
+      let currentQuantity = parseInt(quantitySpan.textContent);
+      if (currentQuantity > 1) {
+        currentQuantity--;
+        quantitySpan.textContent = currentQuantity;
+        counter.textContent = parseInt(counter.textContent) - 1;
+        let productInCart = cart.products.find(p => p.name === productName);
+        if (productInCart) {
+          productInCart.quantity = currentQuantity;
+          localStorage.setItem('cart', JSON.stringify(cart));
+        }
+      }
+    });
+    increaseBtn.addEventListener('click', () => {
+      let currentQuantity = parseInt(quantitySpan.textContent);
+      currentQuantity++;
+      quantitySpan.textContent = currentQuantity;
+      counter.textContent = parseInt(counter.textContent) + 1;
+      let productInCart = cart.products.find(p => p.name === productName);
+      if (productInCart) {
+        productInCart.quantity = currentQuantity;
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+    });
     if (existingProduct) {
       existingProduct.quantity += 1;
       
@@ -75,5 +94,15 @@ buttons.forEach((button) => {
   
 });
 document.addEventListener('DOMContentLoaded', () => { counter.textContent = '0'; localStorage.removeItem('cart'); });
+
+// let shopButton = document.getElementById('shop');
+// let watchButton = document.getElementById('watch');
+// watchButton.addEventListener('click', () => {
+//   =`
+// <div class="min-h-screen bg-gray-100 flex items-center justify-center absolute">
+//   <h1 class="text-4xl font-bold text-gray-800">Watch Page Coming Soon!</h1>
+// </div>
+// `;
+// });
 
     
