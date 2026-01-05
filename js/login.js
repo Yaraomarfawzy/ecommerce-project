@@ -2,6 +2,9 @@
 let loginbutton = document.getElementById("login");
  let emailinput = document.getElementById("Email");
 let passwordinput = document.getElementById("Password");
+let errormessage = document.getElementById("errormessage");
+let errormessage2 = document.getElementById("errormessage2");
+
 
 console.log(loginbutton);
   emailinput.addEventListener("input", () => {
@@ -24,14 +27,19 @@ if (loginbutton) {
         let passwordinput = document.getElementById("Password").value;
       
         console.log(emailinput);
-        if (!emailinput || !passwordinput) {
-            successmessage.textContent = "Please fill in all fields!";
-            successmessage.style.color = "red";
-            successmessage.style.fontWeight = "bold";
+        if (!emailinput) {
+            errormessage.textContent = "Email is required!";
+            errormessage.style.color = "red";
+            errormessage.style.fontWeight = "bold";
             return;
         }
         
-
+        if (!passwordinput) {
+            errormessage2.textContent = "Password is required!";
+            errormessage2.style.color = "red";
+            errormessage2.style.fontWeight = "bold";
+            return;
+        }
         if (emailinput === storedEmail && passwordinput === storedPassword) {
             successmessage.textContent = "Login successful";
              setInterval(() => {

@@ -12,12 +12,33 @@ let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#
 
 
 emailField.addEventListener("input", () => {
-    errormessage.textContent = "";
+    let value = emailField.value.trim();
+    if (value === "") {
+        errormessage.textContent = "";
+        return;
+    }
+    if (!emailRegex.test(value)) {
+        errormessage.textContent = "Invalid email address!";
+        errormessage.style.color = "red";
+        errormessage.style.fontWeight = "bold";
+    } else {
+        errormessage.textContent = "";
+    }
 });
 
 passwordField.addEventListener("input", () => {
-    errormessage.textContent = "";
-    errormessage2.textContent = "";
+    let value = passwordField.value.trim();
+    if (value === "") {
+        errormessage2.textContent = "";
+        return;
+    }
+    if (!passwordRegex.test(value)) {
+        errormessage2.textContent = "Password must be at least 8 characters and include uppercase, lowercase, number, and symbol.";
+        errormessage2.style.color = "red";
+        errormessage2.style.fontWeight = "bold";
+    } else {
+        errormessage2.textContent = "";
+    }
 });
 
 
@@ -29,10 +50,16 @@ registerbutton.addEventListener("click", function () {
     errormessage2.textContent = "";
     successmessage.textContent = "";
 
-    if (emailinput === "" || passwordinput === "") {
-        errormessage.textContent = "Please fill in all fields!";
+    if (emailinput === "") {
+        errormessage.textContent = "Email is required!";
         errormessage.style.color = "red";
         errormessage.style.fontWeight = "bold";
+        return;
+    }
+    if (passwordinput === "") {
+        errormessage2.textContent = "Password is required!";
+        errormessage2.style.color = "red";
+        errormessage2.style.fontWeight = "bold";
         return;
     }
 
