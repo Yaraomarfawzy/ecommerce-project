@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8 text-center">Products (with Reliable Images)</h1>
+    <div class="mb-10 max-w-xl mx-auto">
+    <input 
+      id="search-input"
+      type="text"
+      placeholder="ابحث عن منتج"
+      class="w-full px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm text-lg"
+    >
+  </div>
+
+    <div id="products" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Products loaded here -->
+       <img src="https://i.imgur.com/9LFjwpI.jpeg" alt="" srcset="" width="100" height="100">
+    </div>
+  </div>
+ 
+
+<script src="/js/product.js"></script>

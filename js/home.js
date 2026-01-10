@@ -105,4 +105,85 @@ document.addEventListener('DOMContentLoaded', () => { counter.textContent = '0';
 // `;
 // });
 
-    
+
+async function getCategories() {
+  try {
+    const res = await fetch("https://api.escuelajs.co/api/v1/categories");
+    const categories = await res.json();
+
+    const container = document.getElementById("categories");
+
+    container.innerHTML = categories.map(cat => `
+      <div style="border:1px solid #ccc; padding:10px; margin:10px">
+        <img src="${cat.image}" alt="${cat.name}" width="150" height="150" />
+        <h3>${cat.name}</h3>
+        <p>Slug: ${cat.slug}</p>
+      </div>
+    `).join("");
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+  }
+}
+
+getCategories();
+
+
+const usersContainer = document.getElementById('users');
+
+    async function fetchUsers() {
+      try {
+        const res = await fetch('https://api.escuelajs.co/api/v1/users'); // GET request
+        const users = await res.json();
+        displayUsers(users);
+      } catch (err) {
+        console.error('Error fetching users:', err);
+        usersContainer.innerHTML = '<p class="text-red-500">حدث خطأ أثناء تحميل المستخدمين.</p>';
+      }
+    }
+
+    function displayUsers(users) {
+      if (!users.length) {
+        usersContainer.innerHTML = '<p>لا يوجد مستخدمين لعرضهم.</p>';
+        return;
+      }
+
+      usersContainer.innerHTML = users.map(user => `
+        <div class="bg-white p-4 rounded shadow hover:shadow-lg transition text-center">
+          <img src="${user.avatar || ''}" alt="${user.name}" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover">
+          <h2 class="font-semibold text-lg">${user.name}</h2>
+          <p class="text-gray-700">${user.email}</p>
+          <p class="text-sm text-gray-500">${user.role}</p>
+        </div>
+      `).join('');
+    }
+
+    // Load users on page load
+    fetchUsers();
+
+ const locationsContainer = document.getElementById('locations');
+
+    async function fetchLocations() {
+      try {
+        const res = await fetch('https://api.escuelajs.co/api/v1/locations'); // GET request
+        const locations = await res.json();
+        displayLocations(locations);
+      } catch (err) {
+        console.error('Error fetching locations:', err);
+        locationsContainer.innerHTML = '<p class="text-red-500">حدث خطأ أثناء تحميل المواقع.</p>';
+      }
+    }
+
+    function displayLocations(locations) {
+      if (!locations.length) {
+        locationsContainer.innerHTML = '<p>لا توجد مواقع لعرضها.</p>';
+        return;
+      }
+
+      locationsContainer.innerHTML = locations.map(loc => `
+        <div class="bg-white p-4 rounded shadow hover:shadow-lg transition text-center">
+          <h2 class="font-semibold text-lg mb-2">${loc.name}</h2>
+          <p class="text-gray-700">${loc.description || 'No description available'}</p>
+        </div>
+      `).join('');
+    }
+   fetchLocations();
