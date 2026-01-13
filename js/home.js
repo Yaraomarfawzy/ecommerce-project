@@ -106,59 +106,79 @@ document.addEventListener('DOMContentLoaded', () => { counter.textContent = '0';
 // });
 
 
+const defaultCategoryImage = "https://images.pexels.com/photos/13534508/pexels-photo-13534508.jpeg?_gl=1*gj6mg1*_ga*MTY5MTAxNTI3Ni4xNzY4MzIzMjI3*_ga_8JE65Q40S6*czE3NjgzMjMyMjYkbzEkZzEkdDE3NjgzMjMyNzMkajEzJGwwJGgw";
+
 async function getCategories() {
   try {
     const res = await fetch("https://api.escuelajs.co/api/v1/categories");
     const categories = await res.json();
-
     const container = document.getElementById("categories");
 
-    container.innerHTML = categories.map(cat => `
-      <div style="border:1px solid #ccc; padding:10px; margin:10px">
-        <img src="${cat.image}" alt="${cat.name}" width="150" height="150" />
-        <h3>${cat.name}</h3>
-        <p>Slug: ${cat.slug}</p>
-      </div>
-    `).join("");
+    container.innerHTML = categories.map(cat => {
+      // فحص بسيط: لو الصورة مش موجودة أو مش رابط حقيقي استخدم الافتراضية
+      const imageUrl = (cat.image && cat.image.includes("http")) ? cat.image : defaultCategoryImage;
+
+      return `
+        <div style="border:1px solid #ccc; padding:10px; margin:10px; border-radius:8px; text-align:center;">
+          <img 
+            src="${imageUrl}" 
+            alt="${cat.name}" 
+            width="150" 
+            height="150" 
+            style="object-fit: cover;"
+            onerror="this.onerror=null; this.src='${defaultCategoryImage}';" 
+          />
+          <h3>${cat.name}</h3>
+        </div>
+      `;
+    }).join("");
   } catch (error) {
     console.error("Error fetching categories:", error);
   }
 }
-
 getCategories();
 
-
+const defaultUserImage = "https://images.pexels.com/photos/3850220/pexels-photo-3850220.jpeg?_gl=1*a839hr*_ga*MTY5MTAxNTI3Ni4xNzY4MzIzMjI3*_ga_8JE65Q40S6*czE3NjgzMjMyMjYkbzEkZzEkdDE3NjgzMjMzODQkajEyJGwwJGgw";
 const usersContainer = document.getElementById('users');
 
-    async function fetchUsers() {
-      try {
-        const res = await fetch('https://api.escuelajs.co/api/v1/users'); // GET request
-        const users = await res.json();
-        displayUsers(users);
-      } catch (err) {
-        console.error('Error fetching users:', err);
-        usersContainer.innerHTML = '<p class="text-red-500">حدث خطأ أثناء تحميل المستخدمين.</p>';
-      }
-    }
+async function fetchUsers() {
+  try {
+    const res = await fetch('https://api.escuelajs.co/api/v1/users');
+    const users = await res.json();
+    displayUsers(users);
+  } catch (err) {
+    console.error('Error fetching users:', err);
+    usersContainer.innerHTML = '<p style="color:red;">حدث خطأ أثناء تحميل المستخدمين.</p>';
+  }
+}
 
-    function displayUsers(users) {
-      if (!users.length) {
-        usersContainer.innerHTML = '<p>لا يوجد مستخدمين لعرضهم.</p>';
-        return;
-      }
+function displayUsers(users) {
+  if (!users.length) {
+    usersContainer.innerHTML = '<p>لا يوجد مستخدمين لعرضهم.</p>';
+    return;
+  }
 
-      usersContainer.innerHTML = users.map(user => `
-        <div class="bg-white p-4 rounded shadow hover:shadow-lg transition text-center">
-          <img src="${user.avatar || ''}" alt="${user.name}" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover">
-          <h2 class="font-semibold text-lg">${user.name}</h2>
-          <p class="text-gray-700">${user.email}</p>
-          <p class="text-sm text-gray-500">${user.role}</p>
-        </div>
-      `).join('');
-    }
+  usersContainer.innerHTML = users.map(user => {
+    // التأكد من وجود الصورة وأنها ليست نصاً فارغاً
+    const userAvatar = (user.avatar && user.avatar.includes("http")) ? user.avatar : defaultUserImage;
 
-    // Load users on page load
-    fetchUsers();
+    return `
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition text-center">
+        <img 
+          src="${userAvatar}" 
+          alt="${user.name}" 
+          class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" 
+          onerror="this.onerror=null; this.src='${defaultUserImage}';"
+        >
+        <h2 class="font-semibold text-lg">${user.name}</h2>
+        <p class="text-gray-700">${user.email}</p>
+        <p class="text-sm text-gray-500">${user.role}</p>
+      </div>
+    `;
+  }).join('');
+}
+
+fetchUsers();
 
  const locationsContainer = document.getElementById('locations');
 
